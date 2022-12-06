@@ -18,8 +18,8 @@ export const PostEdit: React.FC<IResourceComponentsProps> = () => {
   const { formProps, saveButtonProps, queryResult } = useForm<IPost>();
 
   const { selectProps: categorySelectProps } = useSelect<IPost>({
-    resource: "categories",
-    defaultValue: queryResult?.data?.data.category.id,
+    resource: "user",
+    defaultValue: queryResult?.data?.data.id,
   });
 
   return (
@@ -27,7 +27,7 @@ export const PostEdit: React.FC<IResourceComponentsProps> = () => {
       <Form {...formProps} layout="vertical">
         <Form.Item
           label={t("posts.fields.title")}
-          name="title"
+          name="name"
           rules={[
             {
               required: true,
@@ -36,7 +36,7 @@ export const PostEdit: React.FC<IResourceComponentsProps> = () => {
         >
           <Input />
         </Form.Item>
-        <Form.Item
+        {/* <Form.Item
           label={t("posts.fields.status.title")}
           name="status"
           rules={[
@@ -84,7 +84,7 @@ export const PostEdit: React.FC<IResourceComponentsProps> = () => {
           ]}
         >
           <MDEditor data-color-mode="light" />
-        </Form.Item>
+        </Form.Item> */}
       </Form>
     </Edit>
   );

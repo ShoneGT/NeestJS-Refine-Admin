@@ -17,29 +17,14 @@ export const PostShow: React.FC<IResourceComponentsProps> = () => {
   const { data, isLoading } = queryResult;
   const record = data?.data;
 
-  const { data: categoryData } = useOne<ICategory>({
-    resource: "categories",
-    id: record?.category.id ?? "",
-    queryOptions: {
-      enabled: !!record?.category.id,
-    },
-  });
 
   return (
     <Show isLoading={isLoading}>
       <Title level={5}>{t("posts.fields.title")}</Title>
-      <Text>{record?.title}</Text>
+      <Text>{record?.name}</Text>
 
       <Title level={5}>{t("posts.fields.status.title")}</Title>
-      <Text>
-        <Tag>{record?.status}</Tag>
-      </Text>
-
-      <Title level={5}>{t("posts.fields.category.title")}</Title>
-      <Text>{categoryData?.data.title}</Text>
-
-      <Title level={5}>{t("posts.fields.content")}</Title>
-      <MarkdownField value={record?.content} />
+      
     </Show>
   );
 };

@@ -27,7 +27,7 @@ import { authProvider } from "./authProvider";
 function App() {
   const { t, i18n } = useTranslation();
 
-  const API_URL = "https://api.nestjsx-crud.refine.dev";
+  const API_URL = "http://localhost:5000";
   const dataProvider = nestjsxCrudDataProvider(API_URL);
 
   const i18nProvider = {
@@ -55,7 +55,7 @@ function App() {
         i18nProvider={i18nProvider}
         resources={[
           {
-            name: "posts",
+            name: "user",
             list: PostList,
             create: PostCreate,
             edit: PostEdit,

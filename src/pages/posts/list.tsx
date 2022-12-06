@@ -33,18 +33,18 @@ export const PostList: React.FC<IResourceComponentsProps> = () => {
     ],
   });
 
-  const categoryIds =
-    tableProps?.dataSource?.map((item) => item.category.id) ?? [];
-  const { data: categoriesData, isLoading } = useMany<ICategory>({
-    resource: "categories",
-    ids: categoryIds,
-    queryOptions: {
-      enabled: categoryIds.length > 0,
-    },
-  });
+  // const categoryIds =
+  //   tableProps?.dataSource?.map((item) => item.category.id) ?? [];
+  // const { data: categoriesData, isLoading } = useMany<ICategory>({
+  //   resource: "user",
+  //   ids: categoryIds,
+  //   queryOptions: {
+  //     enabled: categoryIds.length > 0,
+  //   },
+  // });
 
   const { selectProps: categorySelectProps } = useSelect<ICategory>({
-    resource: "categories",
+    resource: "user",
   });
 
   return (
@@ -59,19 +59,11 @@ export const PostList: React.FC<IResourceComponentsProps> = () => {
           sorter
         />
         <Table.Column
-          dataIndex="title"
-          key="title"
+          dataIndex="name"
+          key="name"
           title={t("posts.fields.title")}
           render={(value) => <TextField value={value} />}
-          defaultSortOrder={getDefaultSortOrder("title", sorter)}
-          sorter
-        />
-        <Table.Column
-          dataIndex="status"
-          key="status"
-          title={t("posts.fields.status.title")}
-          render={(value) => <TagField value={value} />}
-          defaultSortOrder={getDefaultSortOrder("status", sorter)}
+          defaultSortOrder={getDefaultSortOrder("name", sorter)}
           sorter
         />
         <Table.Column
@@ -82,33 +74,7 @@ export const PostList: React.FC<IResourceComponentsProps> = () => {
           defaultSortOrder={getDefaultSortOrder("createdAt", sorter)}
           sorter
         />
-        <Table.Column
-          dataIndex={["category", "id"]}
-          title={t("posts.fields.category.title")}
-          render={(value) => {
-            if (isLoading) {
-              return <TextField value={t("loading")} />;
-            }
-
-            return (
-              <TextField
-                value={
-                  categoriesData?.data.find((item) => item.id === value)?.title
-                }
-              />
-            );
-          }}
-          filterDropdown={(props) => (
-            <FilterDropdown {...props}>
-              <Select
-                style={{ minWidth: 200 }}
-                mode="multiple"
-                placeholder={t("posts.fields.category.filter.placeholder")}
-                {...categorySelectProps}
-              />
-            </FilterDropdown>
-          )}
-        />
+       
         <Table.Column<IPost>
           title={t("table.actions")}
           dataIndex="actions"
